@@ -30,11 +30,14 @@ def dump_payload(payload):
 def check_signature(request):
     actual_signature = request.headers.get("x-fivetran-signature-256")
     if actual_signature:
-        expected_signature = hmac.new(SIGNATURE_SECRET.encode(), request.data, hashlib.sha256).hexdigest().upper()
-        if actual_signature.upper() == expected_signature:
-            print(colorama.Fore.GREEN + "Signature OK")
+        if SIGNATURE_SECRET is None:
+            print(colorama.Fore.RED + "Error: SIGNATURE_SECRET is not defined. Please create a .env file in the root and define it.")
         else:
-            print(colorama.Fore.RED + "Signature mismatch")
+            expected_signature = hmac.new(SIGNATURE_SECRET.encode(), request.data, hashlib.sha256).hexdigest().upper()
+            if actual_signature.upper() == expected_signature:
+                print(colorama.Fore.GREEN + "Signature OK")
+            else:
+                print(colorama.Fore.RED + "Signature mismatch")
 
 # Create a webhook endpoint to receive webhook events
 @app.route("/", methods=["POST"])
