@@ -1,5 +1,5 @@
 # Fivetran Webhooks Example in Python/Flask
-Easily accept [Fivetran webhooks](https://fivetran.com/docs/rest-api/webhooks) from the comfort of your terminal!
+Easily accept [Fivetran webhooks](https://fivetran.com/docs/rest-api/webhooks) from the comfort of your terminal! Check out the same [example utilizing javascript with node/express](https://github.com/fivetran-jimmyhooker/fivetran-webhook-example-express-js)!
 
 ## Setup
 We'll use a really simple Flask server combined with Ngrok to locally test webhooks. 
